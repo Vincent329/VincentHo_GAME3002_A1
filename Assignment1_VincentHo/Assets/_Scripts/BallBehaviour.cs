@@ -5,8 +5,8 @@ using UnityEngine.Assertions;
 
 public class BallBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private float power = 2.5f;
+    // TODO: just subject this ball to the physics and information of power from the cannon, and also have some collision detection on there.
+    // functionality: on detect target, add score
 
     public Vector3 offset;
     [SerializeField]
@@ -22,7 +22,7 @@ public class BallBehaviour : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         Assert.IsNotNull(m_rb, "No Rigid Body Applied");
         lifeSpan = 0.0f;
-        lifeThreshold = 5.0f;
+        lifeThreshold = 10.0f;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class BallBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        lifeSpan += 1/60.0f;
+        lifeSpan += Time.deltaTime;
         if (lifeSpan >= lifeThreshold)
         {
             Despawn();
@@ -44,4 +44,10 @@ public class BallBehaviour : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    //private void OnCollisionEnter(Collision collision, GameObject other)
+    //{
+    //}
+    
+    
 }

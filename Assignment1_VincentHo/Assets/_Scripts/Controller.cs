@@ -10,12 +10,14 @@ public class Controller : MonoBehaviour
 
     private Cannon m_Cannon;
     [SerializeField]
-    private float fHorizontalRotation = 0; // the angle for the horizontal rotation of the cannon  
+    private float fYaw = 0; // the angle for the horizontal rotation of the cannon  
     [SerializeField]
-    private float fVerticalAim = 0; // the angle for the vertical aim of the cannon
+    private float fPitch = 0; // the angle for the vertical aim of the cannon
 
     [SerializeField]
     public float fRotationSpeed = 0.5f; // how fast we want the cannon to rotate
+
+    private Pivot basePoint;
 
 
 
@@ -24,50 +26,53 @@ public class Controller : MonoBehaviour
     {
        m_Cannon = GetComponent<Cannon>();
        Assert.IsNotNull(m_Cannon, "No Cannon Component");
+       basePoint = FindObjectOfType<Pivot>();
     }
 
     private void HandleUserInput()
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            fHorizontalRotation -= fRotationSpeed;
-            fHorizontalRotation = Mathf.Clamp(fHorizontalRotation, -90, 90);
-            Output();
+            fYaw -= fRotationSpeed;
+            fYaw = Mathf.Clamp(fYaw, -90, 90);
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
-            fHorizontalRotation += fRotationSpeed;
-            fHorizontalRotation = Mathf.Clamp(fHorizontalRotation, -90, 90);
-
-            Output();
+            fYaw += fRotationSpeed;
+            fYaw = Mathf.Clamp(fYaw, -90, 90);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            fVerticalAim -= fRotationSpeed;
-            fVerticalAim = Mathf.Clamp(fVerticalAim, -90, 0);
+            fPitch -= fRotationSpeed;
+            fPitch = Mathf.Clamp(fPitch, -90, 0);
 
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
-            fVerticalAim += fRotationSpeed;
-            fVerticalAim = Mathf.Clamp(fVerticalAim, -90, 0);
+            fPitch += fRotationSpeed;
+            fPitch = Mathf.Clamp(fPitch, -90, 0);
 
         }
-        //transform.rotation = Quaternion.Euler(transform.rotation.x + fVerticalAim, transform.rotation.y + fHorizontalRotation, 0.0f);
-        m_Cannon.ChangeCannonAim(fVerticalAim, fHorizontalRotation);
+
+        fYaw += Input.GetAxis("Mouse X");
+        fPitch -= Input.GetAxis("Mouse Y");
+
+        //transform.rotation = Quaternion.Euler(transform.rotation.x + fPitch, transform.rotation.y + fYaw, 0.0f);
+        m_Cannon.ChangeCannonAim(fYaw, fPitch);
+        basePoint.RotateBase(fYaw);
     }
 
     // Update is called once per frame
     void Update()
     {
         HandleUserInput();
-
+        Cursor.visible = false;
 
     }
 
     void Output()
     {
-        Debug.Log(fHorizontalRotation);
+        Debug.Log(fYaw);
     }
 }

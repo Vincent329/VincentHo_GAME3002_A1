@@ -367,6 +367,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 2204573285102063175}
+  fVelocityMagnitude: 0
+  fTheta: 0
+  fPhi: 0
+  vInitialVelocity: {x: 0, y: 0, z: 0}
+  targetReticle: {fileID: 0}
 --- !u!114 &901534313845805863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,5 +385,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fHorizontalRotation: 0
-  fTheta: 0
+  fVerticalAim: 0
   fRotationSpeed: 0.5
