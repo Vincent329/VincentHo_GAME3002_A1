@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     public static Cannon sharedInstance;
+    [SerializeField]
     public Transform spawnPoint; // where the bullet will spawn from upon launch
 
     public Transform floor; // the plane for which the target reticle will be placed upon
@@ -39,7 +40,8 @@ public class Cannon : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) // depending how long we hold the button, this dictates the velocity power
         {
             // increase the velocity power
-            fVelocityMagnitude += 0.07f;
+            fVelocityMagnitude += 0.05f;
+            calculateLaunchDistance();
         }
         if (Input.GetKeyUp(KeyCode.Space) )
         {
@@ -51,6 +53,7 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         HandleInput();
 
     }
@@ -81,12 +84,14 @@ public class Cannon : MonoBehaviour
         // Here we get the distance of the 
         // time = 
 
-        float vx = fVelocityMagnitude * Mathf.Sin(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
-        float vy = fVelocityMagnitude * -Mathf.Sin(Mathf.Deg2Rad * fPhi); // may have to shift this to negative
-        float vz = fVelocityMagnitude * Mathf.Cos(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
+        //float vx = fVelocityMagnitude * Mathf.Sin(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
+        //float vy = fVelocityMagnitude * -Mathf.Sin(Mathf.Deg2Rad * fPhi); // may have to shift this to negative
+        //float vz = fVelocityMagnitude * Mathf.Cos(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
 
-        // for debugging
-        vInitialVelocity = new Vector3(vx, vy, vz);
+        //// for debugging
+        //vInitialVelocity = new Vector3(vx, vy, vz);
+
+        VelocityGain();
 
         // t = 2* (vf - vy)/g........... But this only works with height displacement
         // 0 = h + vy*t + 0.5*a*t^2
@@ -97,34 +102,51 @@ public class Cannon : MonoBehaviour
         // vy is the vertical velocity
         // must multiply by -1 to avoid a negative number
 
+        // 0 = h + vy * t + 0.5*g*t^2
+
         // t = (-vy (+ or -) Sqrt(vy^2 - 4gh)) / 2a 
-        Vector3 offset = transform.position - spawnPoint.transform.position;
+        Vector3 offset = spawnPoint.transform.position - transform.position;
+        float vx = vInitialVelocity.x;
+        float vy = vInitialVelocity.y;
+        float vz = vInitialVelocity.z;
+        // yf - yi
+        float h = spawnPoint.transform.position.y - floor.transform.position.y;
+        //Debug.Log(h);
+        //Debug.Log(vy);
+        float a = Physics.gravity.y; // - 9.81
+        //Debug.Log(a);
+        //Debug.Log(test);
+        a *= 0.5f; // - 4.9
 
-        float h = floor.transform.position.y - spawnPoint.transform.position.y;
-        float a = Physics.gravity.y;
-
-        float time = (-vy + Mathf.Sqrt((vy*vy) - 4*a*h))/ (2*a); // the returning value must be a positive number, debug this if need be
-
+        // quadratic equation: 0 = h + vy*t + 0.5*g*t^2
+        // we must solve for time, predict how long the ball will stay in the air
+        // time = (- b (+ or -) Sqrt(b^2 - 4*a*c)) / 2(a)
+        float time = (-vy - Mathf.Sqrt((vy*vy) - 4*a*h)) / (2*a); // the returning value must be a positive number, debug this if need be
+        Debug.Log(time);
         float dX = vx * time + offset.x;
         float dZ = vz * time + offset.z;
 
         Vector3 distance = new Vector3(dX, h, dZ);
-        //Debug.Log(vInitialVelocity);
+        //Debug.Log(distance);
 
         return distance;
     }
 
-    void Launch(GameObject projectile)
+    private void VelocityGain()
     {
         // ISOLATING THE VELOCITY VALUES
         float vx = fVelocityMagnitude * Mathf.Sin(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
-        float vy = fVelocityMagnitude * -Mathf.Sin(Mathf.Deg2Rad* fPhi); // may have to shift this to negative
+        float vy = fVelocityMagnitude * -Mathf.Sin(Mathf.Deg2Rad * fPhi); // may have to shift this to negative
         float vz = fVelocityMagnitude * Mathf.Cos(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
 
         // for debugging
         vInitialVelocity = new Vector3(vx, vy, vz);
+    }
+    void Launch(GameObject projectile)
+    {
+        VelocityGain();
 
-        Debug.Log(vInitialVelocity);
+        //Debug.Log(vInitialVelocity);
 
         projectile.GetComponent<Rigidbody>().velocity = vInitialVelocity;
     }

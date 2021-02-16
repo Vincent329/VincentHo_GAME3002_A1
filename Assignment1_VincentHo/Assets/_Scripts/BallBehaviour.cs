@@ -22,7 +22,7 @@ public class BallBehaviour : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         Assert.IsNotNull(m_rb, "No Rigid Body Applied");
         lifeSpan = 0.0f;
-        lifeThreshold = 10.0f;
+        lifeThreshold = 2.0f;
     }
 
     private void Start()
