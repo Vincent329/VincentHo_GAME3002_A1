@@ -46,10 +46,10 @@ public class BallBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Target")
+        Renderer hit = collision.gameObject.GetComponent<MeshRenderer>();
+
+        if (collision.gameObject.tag == "Target" && hit.material.color != Color.red)
         {
-            Debug.Log("hit");
-            Renderer hit = collision.gameObject.GetComponent<MeshRenderer>();
             ScoreManager score = FindObjectOfType<ScoreManager>();
             hit.material.color = Color.red;
             score.UpdateScore();

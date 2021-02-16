@@ -20,12 +20,12 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        // set current parameters for the text
         currentScore = 0;
         winScore = 9;
         winText = GetComponent<TextMeshProUGUI>();
         Assert.IsNotNull(winText, "Win Text Not Found");
         winText.enabled = false;
-        Debug.Log(winText.IsActive());
     }
 
     // Update is called once per frame
@@ -37,8 +37,6 @@ public class ScoreManager : MonoBehaviour
     public void UpdateScore()
     {
         currentScore++;
-        Debug.Log(currentScore);
-
         if (currentScore >= winScore)
         {
             m_bWin = true;

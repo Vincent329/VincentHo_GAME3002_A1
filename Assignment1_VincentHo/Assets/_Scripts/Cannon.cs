@@ -49,11 +49,21 @@ public class Cannon : MonoBehaviour
         sharedInstance = this;
         fVelocityMagnitude = 1.0f;
         bPowerBuildDir = true;
-        //fVelocityIncrement = 0.05f;
-        targetReticle = Instantiate(targetReticle, Vector3.zero, Quaternion.identity);
+        targetReticle = Instantiate(targetReticle, new Vector3(0.0f, floor.transform.position.y, 0.0f), Quaternion.identity);
         powerBar.SetMaxVelocity(max);
     }
 
+    #region GETTERS
+    public float GetYaw()
+    {
+        return fTheta;
+    }
+    public float GetPitch()
+    {
+        return -1*fPhi;
+    }
+
+    #endregion
     private void FlipVelocityPower()
     {
         if (fVelocityMagnitude >= max)
