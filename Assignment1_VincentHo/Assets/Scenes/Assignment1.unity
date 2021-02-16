@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 29494483}
   m_Layer: 0
   m_Name: Target (5)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +232,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29494482}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -315,7 +315,7 @@ GameObject:
   - component: {fileID: 156557213}
   m_Layer: 0
   m_Name: Target (8)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -327,7 +327,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 156557212}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -506,7 +506,7 @@ GameObject:
   - component: {fileID: 170895679}
   m_Layer: 0
   m_Name: Target (1)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -518,7 +518,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170895678}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 314174503}
   m_Layer: 0
   m_Name: Target (4)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -754,7 +754,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314174502}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 524584172}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -849,7 +849,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524584171}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1028,7 +1028,7 @@ GameObject:
   - component: {fileID: 728744578}
   m_Layer: 0
   m_Name: Target (3)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1040,7 +1040,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728744577}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 853175944}
   m_Layer: 0
   m_Name: Target (2)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1181,7 +1181,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 853175943}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1367,7 +1367,7 @@ GameObject:
   - component: {fileID: 1040732050}
   m_Layer: 0
   m_Name: Target (7)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1379,7 +1379,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040732049}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1946,7 +1946,7 @@ GameObject:
   - component: {fileID: 2105590497}
   m_Layer: 0
   m_Name: Target (6)
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1958,7 +1958,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105590496}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ce2848ee778fcf24ba9120a553bf50b3, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2

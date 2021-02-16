@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91f3f198c8105646a353ff6d9a19f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 2.5
   offset: {x: 0, y: 0, z: 0}
   lifeThreshold: 0
   lifeSpan: 0

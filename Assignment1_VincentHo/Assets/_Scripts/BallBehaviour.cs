@@ -27,7 +27,6 @@ public class BallBehaviour : MonoBehaviour
 
     private void Start()
     {
-        //m_rb.velocity = transform.forward * power;
     }
 
     // Update is called once per frame
@@ -45,9 +44,21 @@ public class BallBehaviour : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    //private void OnCollisionEnter(Collision collision, GameObject other)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Target")
+        {
+            Debug.Log("hit");
+            Renderer hit = collision.gameObject.GetComponent<MeshRenderer>();
+            hit.material.color = Color.red;
+
+        }
+    }
+
+    //private void OnTriggerEnter(Collider other)
     //{
+
     //}
-    
-    
+
+
 }
