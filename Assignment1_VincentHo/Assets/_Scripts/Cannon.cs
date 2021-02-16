@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cannon : MonoBehaviour
 {
@@ -21,19 +22,48 @@ public class Cannon : MonoBehaviour
     private float fPhi;
 
     [SerializeField]
-    public Vector3 vInitialVelocity;
+    private Vector3 vInitialVelocity;
+
+    [SerializeField]
+    private float fVelocityIncrement;
+
+    // Get the Slider, make sure to import Unity.UI
 
     public GameObject targetReticle; // this is what we'll use for a reticle
+    private Target landingMarker; // We'll use this as a temporary marker... see what I do with this later
 
-    private Target landingMarker; // We'll use this as a temporary marker
+    private bool bPowerBuildDir; // if we pass a threshold, this flag will switch and change if velocity increments or decrements
 
-    private bool bPowerBuild;
+    // for slider values
+    public float max = 30.0f;
+    public float min = 0.0f;
+
+    public SliderScript powerBar;
+
+
     
     // Start is called before the first frame update
     void Start()
     {
+        bPowerBuildDir = true;
         sharedInstance = this;
         fVelocityMagnitude = 1.0f;
+        bPowerBuildDir = true;
+        //fVelocityIncrement = 0.05f;
+        targetReticle = Instantiate(targetReticle, Vector3.zero, Quaternion.identity);
+        powerBar.SetMaxVelocity(max);
+    }
+
+    private void FlipVelocityPower()
+    {
+        if (fVelocityMagnitude >= max)
+        {
+            bPowerBuildDir = false;
+        }
+        else if (fVelocityMagnitude < min)
+        {
+            bPowerBuildDir = true;
+        }
     }
 
     private void HandleInput()
@@ -41,14 +71,26 @@ public class Cannon : MonoBehaviour
         if (Input.GetKey(KeyCode.Space)) // depending how long we hold the button, this dictates the velocity power
         {
             // increase the velocity power
-            fVelocityMagnitude += 0.05f;
-            Debug.Log(calculateLaunchDistance());
+            FlipVelocityPower();
+            if (bPowerBuildDir)
+            {
+                fVelocityMagnitude += fVelocityIncrement;
+            } 
+            else
+            {
+                fVelocityMagnitude -= fVelocityIncrement;
+            }
+            // updates the power bar
+            powerBar.displayVelocity(fVelocityMagnitude);
+
             targetReticle.transform.position = calculateLaunchDistance();
+            targetReticle.transform.rotation = Quaternion.Euler(0.0f, fTheta, 0.0f);
         }
         if (Input.GetKeyUp(KeyCode.Space) )
         {
             Spawn();
             fVelocityMagnitude = 1.0f;
+            
         }
     }
 
@@ -83,27 +125,17 @@ public class Cannon : MonoBehaviour
   
     Vector3 calculateLaunchDistance()
     {
-        // Here we get the distance of the 
-        // time = 
-
-        //float vx = fVelocityMagnitude * Mathf.Sin(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
-        //float vy = fVelocityMagnitude * -Mathf.Sin(Mathf.Deg2Rad * fPhi); // may have to shift this to negative
-        //float vz = fVelocityMagnitude * Mathf.Cos(Mathf.Deg2Rad * fTheta) * Mathf.Cos(Mathf.Deg2Rad * fPhi);
-
-        //// for debugging
-        //vInitialVelocity = new Vector3(vx, vy, vz);
-
         VelocityGain();
 
         // t = 2* (vf - vy)/g........... But this only works with height displacement
-        // 0 = h + vy*t + 0.5*a*t^2
-        // 0 = -0.5*g*t^2 + vy*t + h
+
+        // Projectile Motion Equation
         // where g is the acceleration of gravity
         // t is the time
         // h is the displacement
         // vy is the vertical velocity
-        // must multiply by -1 to avoid a negative number
 
+        // Quadratic Equation
         // 0 = h + vy * t + 0.5*g*t^2
 
         // t = (-vy (+ or -) Sqrt(vy^2 - 4gh)) / 2a 
@@ -126,7 +158,7 @@ public class Cannon : MonoBehaviour
         float dX = vx * time;
         float dZ = vz * time;
 
-        Vector3 distance = new Vector3(dX - offset.x, -h + 2.5f, dZ - offset.z);
+        Vector3 distance = new Vector3(dX - offset.x, floor.transform.position.y, dZ - offset.z);
         //Debug.Log(distance);
 
         return distance;
@@ -145,10 +177,12 @@ public class Cannon : MonoBehaviour
     void Launch(GameObject projectile)
     {
         VelocityGain();
-
-        //Debug.Log(vInitialVelocity);
-
         projectile.GetComponent<Rigidbody>().velocity = vInitialVelocity;
     }
     #endregion
+
+    public void displayVelocity(float value)
+    {
+        value = fVelocityMagnitude;
+    }
 }
