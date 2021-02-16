@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
+    // Bullet Pool
     public static Cannon sharedInstance;
+
     [SerializeField]
     public Transform spawnPoint; // where the bullet will spawn from upon launch
-
     public Transform floor; // the plane for which the target reticle will be placed upon
 
     [SerializeField]
@@ -41,7 +42,8 @@ public class Cannon : MonoBehaviour
         {
             // increase the velocity power
             fVelocityMagnitude += 0.05f;
-            calculateLaunchDistance();
+            Debug.Log(calculateLaunchDistance());
+            targetReticle.transform.position = calculateLaunchDistance();
         }
         if (Input.GetKeyUp(KeyCode.Space) )
         {
@@ -105,28 +107,26 @@ public class Cannon : MonoBehaviour
         // 0 = h + vy * t + 0.5*g*t^2
 
         // t = (-vy (+ or -) Sqrt(vy^2 - 4gh)) / 2a 
-        Vector3 offset = spawnPoint.transform.position - transform.position;
+        Vector3 offset = transform.position - spawnPoint.transform.position;
         float vx = vInitialVelocity.x;
         float vy = vInitialVelocity.y;
         float vz = vInitialVelocity.z;
         // yf - yi
         float h = spawnPoint.transform.position.y - floor.transform.position.y;
-        //Debug.Log(h);
-        //Debug.Log(vy);
+        
         float a = Physics.gravity.y; // - 9.81
         //Debug.Log(a);
         //Debug.Log(test);
-        a *= 0.5f; // - 4.9
+        a *= 0.5f; // - 4.9 m/s^2
 
         // quadratic equation: 0 = h + vy*t + 0.5*g*t^2
         // we must solve for time, predict how long the ball will stay in the air
         // time = (- b (+ or -) Sqrt(b^2 - 4*a*c)) / 2(a)
         float time = (-vy - Mathf.Sqrt((vy*vy) - 4*a*h)) / (2*a); // the returning value must be a positive number, debug this if need be
-        Debug.Log(time);
-        float dX = vx * time + offset.x;
-        float dZ = vz * time + offset.z;
+        float dX = vx * time;
+        float dZ = vz * time;
 
-        Vector3 distance = new Vector3(dX, h, dZ);
+        Vector3 distance = new Vector3(dX - offset.x, -h + 2.5f, dZ - offset.z);
         //Debug.Log(distance);
 
         return distance;
