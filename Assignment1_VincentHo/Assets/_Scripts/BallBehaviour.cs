@@ -22,7 +22,7 @@ public class BallBehaviour : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         Assert.IsNotNull(m_rb, "No Rigid Body Applied");
         lifeSpan = 0.0f;
-        lifeThreshold = 10.0f;
+        lifeThreshold = 6.0f;
     }
 
     private void Start()
@@ -50,8 +50,9 @@ public class BallBehaviour : MonoBehaviour
         {
             Debug.Log("hit");
             Renderer hit = collision.gameObject.GetComponent<MeshRenderer>();
+            ScoreManager score = FindObjectOfType<ScoreManager>();
             hit.material.color = Color.red;
-
+            score.UpdateScore();
         }
     }
 

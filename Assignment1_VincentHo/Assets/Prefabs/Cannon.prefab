@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 90bb6fc323e2f7f43b7bcf6c808d75d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3693beae416926547a653bde56fcd3af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -252,7 +252,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 90bb6fc323e2f7f43b7bcf6c808d75d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -367,11 +367,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 2204573285102063175}
+  floor: {fileID: 0}
   fVelocityMagnitude: 0
   fTheta: 0
   fPhi: 0
   vInitialVelocity: {x: 0, y: 0, z: 0}
+  fVelocityIncrement: 0
   targetReticle: {fileID: 0}
+  max: 30
+  min: 0
+  powerBar: {fileID: 0}
 --- !u!114 &901534313845805863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96f4393d778b52d46af2bba1a572e713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fHorizontalRotation: 0
-  fVerticalAim: 0
+  fYaw: 0
+  fPitch: 0
   fRotationSpeed: 0.5

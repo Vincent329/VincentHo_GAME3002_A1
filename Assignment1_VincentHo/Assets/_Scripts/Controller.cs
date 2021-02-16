@@ -31,32 +31,29 @@ public class Controller : MonoBehaviour
 
     private void HandleUserInput()
     {
+        fYaw += Input.GetAxis("Mouse X");
+        fPitch -= Input.GetAxis("Mouse Y");
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             fYaw -= fRotationSpeed;
-            fYaw = Mathf.Clamp(fYaw, -90, 90);
+           
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
             fYaw += fRotationSpeed;
-            fYaw = Mathf.Clamp(fYaw, -90, 90);
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             fPitch -= fRotationSpeed;
-            fPitch = Mathf.Clamp(fPitch, -90, 0);
 
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
             fPitch += fRotationSpeed;
-            fPitch = Mathf.Clamp(fPitch, -90, 0);
-
         }
-
-        fYaw += Input.GetAxis("Mouse X");
-        fPitch -= Input.GetAxis("Mouse Y");
+        fYaw = Mathf.Clamp(fYaw, -90, 90);
+        fPitch = Mathf.Clamp(fPitch, -90, 0);
 
         //transform.rotation = Quaternion.Euler(transform.rotation.x + fPitch, transform.rotation.y + fYaw, 0.0f);
         m_Cannon.ChangeCannonAim(fYaw, fPitch);
