@@ -13,13 +13,13 @@ public class Cannon : MonoBehaviour
     public Transform floor; // the plane for which the target reticle will be placed upon
 
     [SerializeField]
-    private float fVelocityMagnitude = 1.0f;
+    private float fVelocityMagnitude = 1.0f; // base value of 1 to start
 
     [SerializeField]
-    private float fTheta;
+    private float fTheta; // yaw
 
     [SerializeField]
-    private float fPhi;
+    private float fPhi; // pitch
 
     [SerializeField]
     private Vector3 vInitialVelocity;
@@ -27,13 +27,12 @@ public class Cannon : MonoBehaviour
     [SerializeField]
     private float fVelocityIncrement;
 
-    // Get the Slider, make sure to import Unity.UI
 
     public GameObject targetReticle; // this is what we'll use for a reticle
-    private Target landingMarker; // We'll use this as a temporary marker... see what I do with this later
 
     private bool bPowerBuildDir; // if we pass a threshold, this flag will switch and change if velocity increments or decrements
 
+    // Get the Slider, make sure to import Unity.UI
     // for slider values
     public float max = 30.0f;
     public float min = 0.0f;

@@ -34,13 +34,14 @@ public class ScoreManager : MonoBehaviour
         
     }
 
-    public void UpdateScore()
+    public void UpdateScore() // Called from the ballBehaviour script upon collision
     {
         currentScore++;
         if (currentScore >= winScore)
         {
             m_bWin = true;
-            winText.enabled = m_bWin;
+            winText.enabled = m_bWin; // displays the win text upon flag switch / win condition
+
         }
     }
 }

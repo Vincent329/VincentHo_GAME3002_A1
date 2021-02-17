@@ -24,9 +24,12 @@ public class Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // get the components of the cannon and pivot point
        m_Cannon = GetComponent<Cannon>();
        Assert.IsNotNull(m_Cannon, "No Cannon Component");
        basePoint = FindObjectOfType<Pivot>();
+       Assert.IsNotNull(basePoint, "No Pivot Component");
+
     }
 
     private void HandleUserInput()
@@ -55,7 +58,7 @@ public class Controller : MonoBehaviour
         fYaw = Mathf.Clamp(fYaw, -90, 90);
         fPitch = Mathf.Clamp(fPitch, -90, 0);
 
-        //transform.rotation = Quaternion.Euler(transform.rotation.x + fPitch, transform.rotation.y + fYaw, 0.0f);
+        // With the updated values, change the rotation values of the cannon and the base pivot
         m_Cannon.ChangeCannonAim(fYaw, fPitch);
         basePoint.RotateBase(fYaw);
     }
@@ -63,13 +66,9 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // on update, handle the user input
         HandleUserInput();
         Cursor.visible = false;
 
-    }
-
-    void Output()
-    {
-        Debug.Log(fYaw);
     }
 }
